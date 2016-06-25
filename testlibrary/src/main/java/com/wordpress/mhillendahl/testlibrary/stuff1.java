@@ -1,6 +1,7 @@
 package com.wordpress.mhillendahl.testlibrary;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
@@ -19,6 +20,21 @@ public class stuff1 {
 
         return "34.0195 N 118.4912 W";
 
+    }
+
+    public static List<String> getApps(Context context){
+
+        PackageManager pm = context.getPackageManager();
+
+        List<ApplicationInfo> listAppInfo = pm.getInstalledApplications(0);
+
+        List<String> apps = new ArrayList<String>();
+
+        for (ApplicationInfo app : listAppInfo) {
+            apps.add(app.className);
+        }
+
+        return apps;
     }
 
     /*

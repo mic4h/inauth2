@@ -22,15 +22,6 @@ android {
     }
 }
 
-/*
-repositories { //manually added
-
-    flatDir{
-        dirs 'libs'
-    }
-}
-*/
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'

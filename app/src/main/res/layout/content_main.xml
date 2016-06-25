@@ -15,5 +15,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="inauth2" />
+        android:text="Installed Apps" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="20dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <TextView
+            android:id="@+id/tvAppList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="app 1\napp 2" />
+    </ScrollView>
+
 </RelativeLayout>

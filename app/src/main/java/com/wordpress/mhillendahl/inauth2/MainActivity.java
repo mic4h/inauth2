@@ -1,6 +1,5 @@
 package com.wordpress.mhillendahl.inauth2;
 
-import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,14 +16,16 @@ import com.wordpress.mhillendahl.testlibrary.stuff1;
 
 //gps crap -mike
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
-import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 //end gps crap
+
+//app list crap
+import java.util.List;
+
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.widget.TextView;
+import android.widget.ToggleButton;
+//end app list crap
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,28 +40,20 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        GPSTracker gps = new GPSTracker(this);
-        if(gps.canGetLocation()){
-            //gps enabled. or something.
+        //GPS
 
-            mLat = Double.toString(gps.getLatitude());
-            mLon = Double.toString(gps.getLongitude());
-        }
+        final GPSTracker gps = new GPSTracker(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                */
 
-                /*
-                Snackbar.make(view, stuff1.getCoords(), Snackbar.LENGTH_LONG)
-                      .setAction("Action", null).show();
-                */
-
+                //GPSTracker gps = new GPSTracker(this);
+                if(gps.canGetLocation()){
+                    mLat = Double.toString(gps.getLatitude());
+                    mLon = Double.toString(gps.getLongitude());
+                }
 
                 Snackbar.make(view, "GPS: "+mLat+", "+mLon+" (latitude, longitude)", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -68,58 +61,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        //create an instance of google api client -mike
-        if (true) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    //.addApi(LocationServices.API)
-                    //.build();
+        //APPS
+
+        List<String> lApps = stuff1.getApps(this);
+        String[] aApps = lApps.toArray(new String[lApps.size()]);
+        String sApps = "";
+        for (String app : lApps) {
+            if (app!=null)
+                sApps += app+"\n";
         }
-        */
 
-        /*
-        //create an instance of google api client -mike
-        if (mGoogleApiClient == null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
-        }
-        */
+        TextView textView = (TextView) findViewById(R.id.tvAppList);
+        textView.setText(sApps);
+        //textView.setText("fuck");
 
+        //ENCRYPT
+
+        ToggleButton tog = (ToggleButton) findViewById(R.id.tog);
+        tog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //do shit when you click the tog button
+            }
+        });
     }
 
-    /*
-
-    //gps api connect?
-    @Override
-    protected void onStart() {
-        mGoogleApiClient.connect();
-        super.onStart();
-    }
-
-    //gps pi disconnect?
-    protected void onStop() {
-        mGoogleApiClient.disconnect();
-        super.onStop();
-    }
-
-    //gps api
-    public void onConnected(Bundle connectionHint){
-        android.location.Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if (mLastLocation != null){
-
-            //mLat.setText(String.valueOf(mLastLocation.getLatitude()));
-            //mLon.setText(String.valueOf(mLastLocation.getLongitude()));
-            mLat = String.valueOf(mLastLocation.getLatitude());
-            mLon = String.valueOf(mLastLocation.getLongitude());
-        }
-    }
-
-    */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
