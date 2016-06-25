@@ -9,6 +9,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.regex.Pattern;
+
 /**
  * Created by MichaelHillendahl on 6/23/2016.
  */
@@ -36,6 +38,24 @@ public class stuff1 {
 
         return apps;
     }
+
+    public boolean isLegal(String s, String c){
+        return s.matches("[a-zA-Z]+") && c.matches("[a-zA-Z]+");
+    }
+
+    /*
+    public String encrypt(String str, String cy){
+
+        for (int i = 0; i< str.length(); i++)
+        {
+
+            cy[i%cy.length()]
+
+        }
+
+        return out;
+    }
+    */
 
     /*
     public static List<String> getApps() {

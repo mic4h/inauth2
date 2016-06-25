@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         String[] aApps = lApps.toArray(new String[lApps.size()]);
         String sApps = "";
         for (String app : lApps) {
-            //if (app!=null)
+            if (app!=null)
                 sApps += app+"\n";
         }
 

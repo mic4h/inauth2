@@ -12,7 +12,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
+            android:label="SDET (QA) Coding Challenge 1"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
