@@ -23,16 +23,6 @@
 
     <include layout="@layout/content_main" />
 
-    <android.widget.ToggleButton
-        android:id="@+id/tog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:disabledAlpha="1.2"
-        android:textOff="Plaintext"
-        android:textOn="Encrypted"
-        android:enabled="false" />
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

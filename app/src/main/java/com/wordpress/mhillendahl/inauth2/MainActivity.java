@@ -14,15 +14,9 @@ import android.view.MenuItem;
 import com.wordpress.mhillendahl.testlibrary.GPSTracker;
 import com.wordpress.mhillendahl.testlibrary.stuff1;
 
-//gps crap -mike
-
-//end gps crap
-
 //app list crap
 import java.util.List;
 
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 //end app list crap
@@ -67,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         String[] aApps = lApps.toArray(new String[lApps.size()]);
         String sApps = "";
         for (String app : lApps) {
-            if (app!=null)
+            //if (app!=null)
                 sApps += app+"\n";
         }
 
@@ -77,13 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
         //ENCRYPT
 
-        ToggleButton tog = (ToggleButton) findViewById(R.id.tog);
-        tog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //do shit when you click the tog button
-            }
-        });
+        // ?
+
     }
 
 
