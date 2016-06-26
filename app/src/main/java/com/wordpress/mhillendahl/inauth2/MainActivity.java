@@ -115,6 +115,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //ADD INTEGER TO LIST
+
+        final Button but3 = (Button) findViewById(R.id.button3);
+        but3.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            public void onClick(View view) {
+                EditText txt = (EditText) findViewById(R.id.extractEditText5);
+                String sTxt = txt.getText().toString();
+                EditText list = (EditText) findViewById(R.id.extractEditText6);
+
+                if (stuff1.isNum(sTxt)){
+                    list.append(sTxt);
+                }
+                txt.setText("");
+
+                return;
+            }
+        });
+
         // ?
 
     }

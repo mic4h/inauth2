@@ -94,7 +94,9 @@ public class stuff1 {
         return out;
     }
 
-
+    public static boolean isNum(String s){
+        return s.matches("\\d+\\.?\\d*|\\d*\\.?\\d+");
+    }
 
     /*
     public static List<String> getApps() {
