@@ -17,6 +17,8 @@ import com.wordpress.mhillendahl.testlibrary.stuff1;
 //app list crap
 import java.util.List;
 
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 //end app list crap
@@ -42,16 +44,13 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //GPSTracker gps = new GPSTracker(this);
                 if(gps.canGetLocation()){
                     mLat = Double.toString(gps.getLatitude());
                     mLon = Double.toString(gps.getLongitude());
                 }
-
                 Snackbar.make(view, "GPS: "+mLat+", "+mLon+" (latitude, longitude)", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-
             }
         });
 
@@ -70,6 +69,51 @@ public class MainActivity extends AppCompatActivity {
         //textView.setText("fuck");
 
         //ENCRYPT
+
+        final Button but1 = (Button) findViewById(R.id.button);
+        but1.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            public void onClick(View view) {
+
+                EditText et1 = (EditText) findViewById(R.id.extractEditText);
+                String plaintext = et1.getText().toString();
+                EditText et2 = (EditText) findViewById(R.id.extractEditText2);
+                String cipher = et2.getText().toString();
+                EditText et3 = (EditText) findViewById(R.id.extractEditText3);
+
+                if (!stuff1.isLegal(plaintext, cipher))
+                    et3.setText("<inputerror>");
+                else
+                    et3.setText(stuff1.encrypt(plaintext, cipher));
+
+                return;
+            }
+        });
+
+        //DECRYPT
+
+        final Button but2 = (Button) findViewById(R.id.button2);
+        but2.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            public void onClick(View view) {
+                EditText et3 = (EditText) findViewById(R.id.extractEditText3);
+                String encrypted = et3.getText().toString();
+                EditText et2 = (EditText) findViewById(R.id.extractEditText2);
+                String cipher = et2.getText().toString();
+                EditText et4 = (EditText) findViewById(R.id.extractEditText4);
+
+
+                if (!stuff1.isLegal(encrypted, cipher))
+                    et4.setText("<inputerror>");
+                else
+                    et4.setText(stuff1.decrypt(encrypted, cipher));
+
+                //et4.setText("kiss my ass");
+
+
+                return;
+            }
+        });
 
         // ?
 

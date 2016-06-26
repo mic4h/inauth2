@@ -11,6 +11,9 @@ import java.util.List;
 
 import java.util.regex.Pattern;
 
+//encrypt stuff
+import java.io.*;
+
 /**
  * Created by MichaelHillendahl on 6/23/2016.
  */
@@ -39,23 +42,59 @@ public class stuff1 {
         return apps;
     }
 
-    public boolean isLegal(String s, String c){
+    public static boolean isLegal(String s, String c){
         return s.matches("[a-zA-Z]+") && c.matches("[a-zA-Z]+");
     }
 
-    /*
-    public String encrypt(String str, String cy){
+    public static String encrypt(String str, String cy){
+
+        String out = "";
+        String strOrig=str;
+        str = str.toUpperCase();
+        cy = cy.toUpperCase();
 
         for (int i = 0; i< str.length(); i++)
         {
+            int range = 90-65+1; //Z - A +1
+            int shift = (int)(cy.charAt(i%cy.length())-65);
+            int oldchar = (int)(str.charAt(i));
+            int newchar = ((oldchar-65)+shift)%range + 65;
 
-            cy[i%cy.length()]
+            //remember original case
+            if ( (int)(strOrig.charAt(i)) > 90 )
+                newchar += (97-65); //a - A
 
+            out+=(char)newchar;
         }
 
         return out;
     }
-    */
+
+    public static String decrypt(String str, String cy){
+
+        String out = "";
+        String strOrig=str;
+        str = str.toUpperCase();
+        cy = cy.toUpperCase();
+
+        for (int i = 0; i< str.length(); i++)
+        {
+            int range = 90-65+1; //Z - A +1
+            int shift = (int)(cy.charAt(i%cy.length())-65);
+            int oldchar = (int)(str.charAt(i));
+            int newchar = ((oldchar-65)+range-shift)%range + 65;
+
+            //remember original case
+            if ( (int)(strOrig.charAt(i)) > 90 )
+                newchar += (97-65); //a - A
+
+            out+=(char)newchar;
+        }
+
+        return out;
+    }
+
+
 
     /*
     public static List<String> getApps() {

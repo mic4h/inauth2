@@ -43,27 +43,28 @@
     </ScrollView>
 
     <Button
+        android:id="@+id/button"
+        android:text="encrypt"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:text="encrypt"
-        android:id="@+id/button"
         android:layout_below="@+id/extractEditText2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <Button
+        android:id="@+id/button2"
+        android:text="decrypt"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:text="decrypt"
-        android:id="@+id/button2"
         android:layout_below="@+id/extractEditText3"
         android:layout_alignLeft="@+id/button"
         android:layout_alignStart="@+id/button" />
 
     <android.widget.EditText
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:text="plaintext"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="XYZxyz"
         android:id="@+id/extractEditText"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -74,8 +75,9 @@
 
     <android.widget.EditText
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:text="cipher"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="abc"
         android:id="@+id/extractEditText2"
         android:layout_below="@+id/extractEditText"
         android:layout_alignParentLeft="true"
@@ -86,8 +88,9 @@
 
     <android.widget.EditText
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:text="encryptedtext"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text=""
         android:id="@+id/extractEditText3"
         android:layout_below="@+id/button"
         android:layout_alignParentLeft="true"
@@ -95,12 +98,11 @@
         android:layout_toLeftOf="@+id/textView4"
         android:layout_toStartOf="@+id/textView4" />
 
-
-
     <android.widget.EditText
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:text="decryptedtext"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="test"
         android:id="@+id/extractEditText4"
         android:layout_below="@+id/button2"
         android:layout_alignParentLeft="true"
