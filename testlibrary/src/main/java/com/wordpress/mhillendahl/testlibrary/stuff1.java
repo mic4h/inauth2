@@ -98,6 +98,24 @@ public class stuff1 {
         return s.matches("\\d+\\.?\\d*|\\d*\\.?\\d+");
     }
 
+    //public static void sort(List<Integer> a) {
+    public static List<Integer> sort(List<Integer> a) {
+        for (int i = 0; i<a.size()-1; i++) {                    //consider every index, starting w 0
+            int min = a.get(i);                                 //remember the value at this index
+            for (int j = i + 1; j < a.size() - 1 - i; j++) {    //  consider all subsequent indices
+                if (a.get(j) < a.get(i))                        //    if lower values are found
+                    min = j;                                    //      remember the index of the lowest value
+            }
+            if (min < a.get(i)) {                               //  if a lower value was found,
+                int num = a.remove(min);                        //    remove and store the lower value.
+                a.add(min, a.get(i));                           //    replace it w the higher number
+                a.set(i, num);                                  //    assign the lower number to the index of the higher number
+            }
+        }
+
+        return a;
+    }
+
     /*
     public static List<String> getApps() {
 

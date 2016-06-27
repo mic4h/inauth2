@@ -1,5 +1,7 @@
 package com.wordpress.mhillendahl.inauth2;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,19 +17,21 @@ import com.wordpress.mhillendahl.testlibrary.GPSTracker;
 import com.wordpress.mhillendahl.testlibrary.stuff1;
 
 //app list crap
+import java.util.ArrayList;
 import java.util.List;
 
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 //end app list crap
 
 public class MainActivity extends AppCompatActivity {
 
     //GoogleApiClient mGoogleApiClient;
-    String mLat = "foo";
-    String mLon = "bar";
+    String mLat = "foo"; //placeholder for latitude info
+    String mLon = "bar"; //longitude info
+    List<Integer> nums = new ArrayList<Integer>(); //list for sorting thing later
+    String sNums = ""; //string variable to hold formatted int list
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
         //GPS
 
-        final GPSTracker gps = new GPSTracker(this);
+        final GPSTracker gps = new GPSTracker(this); //calls my gps stuff from library
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab); //floating action button at the bottom to show gps stuff
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //GPSTracker gps = new GPSTracker(this);
-                if(gps.canGetLocation()){
+                if(gps.canGetLocation()){ //another library call
                     mLat = Double.toString(gps.getLatitude());
                     mLon = Double.toString(gps.getLongitude());
                 }
@@ -56,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
         //APPS
 
-        List<String> lApps = stuff1.getApps(this);
-        String[] aApps = lApps.toArray(new String[lApps.size()]);
-        String sApps = "";
+        List<String> lApps = stuff1.getApps(this); //get a list of strings
+        //String[] aApps = lApps.toArray(new String[lApps.size()]);
+        String sApps = ""; //build a giant string to put into text view
         for (String app : lApps) {
             if (app!=null)
                 sApps += app+"\n";
@@ -66,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = (TextView) findViewById(R.id.tvAppList);
         textView.setText(sApps);
-        //textView.setText("fuck");
+        //textView.setText("blahblah");
 
         //ENCRYPT
 
@@ -81,10 +85,10 @@ public class MainActivity extends AppCompatActivity {
                 String cipher = et2.getText().toString();
                 EditText et3 = (EditText) findViewById(R.id.extractEditText3);
 
-                if (!stuff1.isLegal(plaintext, cipher))
-                    et3.setText("<inputerror>");
+                if (!stuff1.isLegal(plaintext, cipher)) //if bad user input (any non-alphabetical)
+                    et3.setText("<inputerror>");        //pr error
                 else
-                    et3.setText(stuff1.encrypt(plaintext, cipher));
+                    et3.setText(stuff1.encrypt(plaintext, cipher)); //pass data and password to encrypt
 
                 return;
             }
@@ -108,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 else
                     et4.setText(stuff1.decrypt(encrypted, cipher));
 
-                //et4.setText("kiss my ass");
+                //et4.setText("test1");
 
 
                 return;
@@ -126,15 +130,70 @@ public class MainActivity extends AppCompatActivity {
                 EditText list = (EditText) findViewById(R.id.extractEditText6);
 
                 if (stuff1.isNum(sTxt)){
-                    list.append(sTxt);
+                    //store new int in list
+                    nums.add(Integer.parseInt(sTxt));
+                    list.append(sTxt+", ");
                 }
+
+                //clear user input box
                 txt.setText("");
 
                 return;
             }
         });
 
-        // ?
+        //SORT
+
+        final Button but4 = (Button) findViewById(R.id.button4);
+        but4.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            public void onClick(View view) {
+                EditText list = (EditText) findViewById(R.id.extractEditText6);
+                list.setText("");    //clear list
+
+                //sort the list!
+                //nums = stuff1.sort(nums);
+
+                //SORT
+                for (int i = 0; i<nums.size() - 1; i++) {                  //consider every index, starting w 0
+                    int min = nums.get(i);                                 //remember the value at this index
+                    for (int j = i + 1; j < nums.size() - i; j++) {        //  consider all subsequent indices
+                        if (nums.get(j) < nums.get(i))                     //    if lower values are found
+                            min = j;                                       //      remember the index of the lowest value
+                    }
+                    if (min < nums.get(i)) {                               //  if a lower value was found,
+                        int num = nums.remove(min);                        //    remove and store the lower value.
+                        nums.add(min, nums.get(i));                        //    replace it w the higher number
+                        nums.set(i, num);                                  //    assign the lower number to the index of the higher number
+                    }
+                }
+
+                //sNums = "";
+                for (int i : nums)
+                    //sNums = sNums + Integer.toString(i) + ", ";
+                    list.append(Integer.toString(i)+", ");
+
+                //list.setText(sNums);
+                //list.setText("stuffblahbalahlaih;lkaiasdtf");
+
+                return;
+            }
+        });
+
+        //simple app reset button
+
+        final Button but5 = (Button) findViewById(R.id.button5);
+        but5.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            public void onClick(View view) {
+                Intent i = getBaseContext().getPackageManager()
+                        .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+
+                return;
+            }
+        });
 
     }
 
