@@ -1,5 +1,8 @@
+
+
 APP USAGE
 
+note: this app was written and tested on a Genymotion Google Nexus 6 running Android 5.1.0 API22
 
 vigenere cipher
 
