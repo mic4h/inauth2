@@ -42,29 +42,31 @@ public class stuff1 {
         return apps;
     }
 
-    public static boolean isLegal(String s, String c){
-        return s.matches("[a-zA-Z]+") && c.matches("[a-zA-Z]+");
+    public static boolean isLegal(String s, String kw){
+        return kw.matches("[a-zA-Z]+") && kw.matches("[a-zA-Z]+");
     }
 
-    public static String encrypt(String str, String cy){
+    public static String encrypt(String str, String kw){
 
-        String out = "";
-        String strOrig=str;
-        str = str.toUpperCase();
-        cy = cy.toUpperCase();
+        //this alg is expanded a lot for readability. it could be done in fewer lines but that's not desirable for this project.
 
-        for (int i = 0; i< str.length(); i++)
+        String out = "";            //prepare empty string to return as output
+        String strOrig=str;         //remember original state of input text
+        str = str.toUpperCase();    //force text to all caps to simplify encryption (case restored after encryption, later)
+        kw = kw.toUpperCase();      //same with keyword
+
+        for (int i = 0; i< str.length(); i++)                   //consider each char in the str
         {
-            int range = 90-65+1; //Z - A +1
-            int shift = (int)(cy.charAt(i%cy.length())-65);
-            int oldchar = (int)(str.charAt(i));
-            int newchar = ((oldchar-65)+shift)%range + 65;
+            int range = 90-65+1; //Z - A +1                     //26 letters (derived from ascii values)
+            int shift = (int)(kw.charAt(i%kw.length())-65);     //pick correct char from keyword, subtract 65 so that 'a' has a shift value of 0, and force int type
+            int oldchar = (int)(str.charAt(i));                 //remember original char in text
+            int newchar = ((oldchar-65)+shift)%range + 65;      //subtract 65 from orig char so that a = 0, apply shift to find new char, mod range in case we exceeded 26 (z), and add 65 back to properly represent an ascii value
 
             //remember original case
-            if ( (int)(strOrig.charAt(i)) > 90 )
-                newchar += (97-65); //a - A
+            if ( (int)(strOrig.charAt(i)) > 90 )                //if the original char was lowercase (ascii codes greater than 90)
+                newchar += (97-65); //a - A                     //shift the encrypted char from uppercase to lowercase ascii code
 
-            out+=(char)newchar;
+            out+=(char)newchar;                                 //append new encrypted char to output string
         }
 
         return out;
@@ -82,8 +84,8 @@ public class stuff1 {
             int range = 90-65+1; //Z - A +1
             int shift = (int)(cy.charAt(i%cy.length())-65);
             int oldchar = (int)(str.charAt(i));
-            int newchar = ((oldchar-65)+range-shift)%range + 65;
-
+            int newchar = ((oldchar-65)+range-shift)%range + 65; // +range before mod to ensure positive result
+                                                                 // -range instead of +range to decrypt instead of encrypt
             //remember original case
             if ( (int)(strOrig.charAt(i)) > 90 )
                 newchar += (97-65); //a - A

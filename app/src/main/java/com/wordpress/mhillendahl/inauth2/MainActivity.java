@@ -82,13 +82,13 @@ public class MainActivity extends AppCompatActivity {
                 EditText et1 = (EditText) findViewById(R.id.extractEditText);
                 String plaintext = et1.getText().toString();
                 EditText et2 = (EditText) findViewById(R.id.extractEditText2);
-                String cipher = et2.getText().toString();
+                String keyword = et2.getText().toString();
                 EditText et3 = (EditText) findViewById(R.id.extractEditText3);
 
-                if (!stuff1.isLegal(plaintext, cipher)) //if bad user input (any non-alphabetical)
+                if (!stuff1.isLegal(plaintext, keyword)) //if bad user input (any non-alphabetical)
                     et3.setText("<inputerror>");        //pr error
                 else
-                    et3.setText(stuff1.encrypt(plaintext, cipher)); //pass data and password to encrypt
+                    et3.setText(stuff1.encrypt(plaintext, keyword)); //pass data and password to encrypt
 
                 return;
             }
@@ -103,14 +103,14 @@ public class MainActivity extends AppCompatActivity {
                 EditText et3 = (EditText) findViewById(R.id.extractEditText3);
                 String encrypted = et3.getText().toString();
                 EditText et2 = (EditText) findViewById(R.id.extractEditText2);
-                String cipher = et2.getText().toString();
+                String keyword = et2.getText().toString();
                 EditText et4 = (EditText) findViewById(R.id.extractEditText4);
 
 
-                if (!stuff1.isLegal(encrypted, cipher))
+                if (!stuff1.isLegal(encrypted, keyword))
                     et4.setText("<inputerror>");
                 else
-                    et4.setText(stuff1.decrypt(encrypted, cipher));
+                    et4.setText(stuff1.decrypt(encrypted, keyword));
 
                 //et4.setText("test1");
 
