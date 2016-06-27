@@ -94,8 +94,14 @@ public class stuff1 {
         return out;
     }
 
+    /*
     public static boolean isNum(String s){
         return s.matches("\\d+\\.?\\d*|\\d*\\.?\\d+");
+    }
+    */
+
+    public static boolean isNum(String s){
+        return s.matches("\\d+");
     }
 
     //public static void sort(List<Integer> a) {
