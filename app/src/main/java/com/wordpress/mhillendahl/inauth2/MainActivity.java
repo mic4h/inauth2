@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     //GoogleApiClient mGoogleApiClient;
     String mLat = "foo"; //placeholder for latitude info
     String mLon = "bar"; //longitude info
-    List<Integer> nums = new ArrayList<Integer>(); //list for sorting thing later
+    ArrayList<Integer> nums = new ArrayList<>(); //list for sorting thing later
     String sNums = ""; //string variable to hold formatted int list
 
     @Override
@@ -129,14 +129,14 @@ public class MainActivity extends AppCompatActivity {
                 String sTxt = txt.getText().toString();
                 EditText list = (EditText) findViewById(R.id.extractEditText6);
 
-                if (stuff1.isNum(sTxt)){
-                    //store new int in list
+                if (stuff1.isNum(sTxt))
                     nums.add(Integer.parseInt(sTxt));
-                    list.append(sTxt+", ");
-                }
 
-                //clear user input box
-                txt.setText("");
+                list.setText("");           //clear list
+                for (int i : nums)          //for all ints in nums
+                    list.append(i+", ");    //append in to list
+
+                txt.setText("");            //clear user input box
 
                 return;
             }
@@ -156,12 +156,12 @@ public class MainActivity extends AppCompatActivity {
 
                 //SORT
                 for (int i = 0; i<nums.size() - 1; i++) {                  //consider every index, starting w 0
-                    int min = nums.get(i);                                 //remember the value at this index
-                    for (int j = i + 1; j < nums.size() - i; j++) {        //  consider all subsequent indices
-                        if (nums.get(j) < nums.get(i))                     //    if lower values are found
-                            min = j;                                       //      remember the index of the lowest value
+                    int min = i;                                           //remember this index
+                    for (int j = i + 1; j < nums.size(); j++) {            //  consider all subsequent indices
+                        if (nums.get(j) < nums.get(min))                   //    as lower values are found
+                            min = j;                                       //      remember the index of the lower value
                     }
-                    if (min < nums.get(i)) {                               //  if a lower value was found,
+                    if (nums.get(min) < nums.get(i)) {                     //  if a lower value was found,
                         int num = nums.remove(min);                        //    remove and store the lower value.
                         nums.add(min, nums.get(i));                        //    replace it w the higher number
                         nums.set(i, num);                                  //    assign the lower number to the index of the higher number
